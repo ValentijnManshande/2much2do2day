@@ -6,12 +6,12 @@ trait DateTimeTrait
     /**
     * @ORM\Column(type="datetime", name="created_at", nullable=false)
     */
-    public \DateTime $createdAt;
+    private \DateTime $createdAt;
 
     /**
     * @ORM\Column(type="datetime", name="updated_at", nullable=true)
     */
-    public \DateTime $updatedAt;
+    private \DateTime $updatedAt;
 
     public function getCreatedAt() : DateTime
     {

@@ -6,7 +6,7 @@ trait CompletedTrait
     /**
     * @ORM\Column(type="boolean")
     */
-    public boolean $isComplete;
+    private boolean $isComplete;
 
     public function getIsComplete() : bool
     {

@@ -6,7 +6,7 @@ trait PublishedTrait
     /**
     * @ORM\Column(type="boolean")
     */
-    public boolean $isPublished;
+    private boolean $isPublished;
 
     public function getIsPublished() : bool
     {
