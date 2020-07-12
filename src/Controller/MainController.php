@@ -7,10 +7,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-    * @Route("/", name="index")
+    * @Route("/", name="home")
     */
     public function index()
     {
+        if(!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('login');
+        };
+
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);

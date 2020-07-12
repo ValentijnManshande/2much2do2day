@@ -18,14 +18,6 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Je moet de gebruiksvoorwaarden accepteren.',
-                    ]),
-                ],
-            ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -37,6 +29,14 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Het wachtwoord moet minstens {{ limit }} karakters bevatten',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
+                    ]),
+                ],
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Je moet de gebruiksvoorwaarden accepteren.',
                     ]),
                 ],
             ])

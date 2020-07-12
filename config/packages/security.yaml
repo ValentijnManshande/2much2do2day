@@ -24,7 +24,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: login
             form_login:
                 login_path: login
                 check_path: login
@@ -41,4 +41,3 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/my-profile, roles: ROLE_USER }
-        - { path: ^/overview, roles: ROLE_GUEST }
