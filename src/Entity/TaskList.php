@@ -6,18 +6,18 @@ use App\Repository\TaskListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Partials\CompletedTrait as CompletedTrait;
-use App\Partials\DateTimeTrait as DateTimeTrait;
-use App\Partials\PublishedTrait as PublishedTrait;
+use App\Partials\CompletedTrait as Completed;
+use App\Partials\DateTimeTrait as DateTimes;
+use App\Partials\PublishedTrait as Published;
 
 /**
  * @ORM\Entity(repositoryClass=TaskListRepository::class)
  */
 class TaskList
 {
-    use CompletedTrait;
-    use DateTimeTrait;
-    use PublishedTrait;
+    use Completed;
+    use DateTimes;
+    use Published;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

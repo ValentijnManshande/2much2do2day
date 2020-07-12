@@ -4,14 +4,14 @@ namespace App\Entity;
 
 use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Partials\CompletedTrait as CompletedTrait;
+use App\Partials\CompletedTrait as Completed;
 
 /**
  * @ORM\Entity(repositoryClass=TaskRepository::class)
  */
 class Task
 {
-    use CompletedTrait;
+    use Completed;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
