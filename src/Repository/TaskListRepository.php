@@ -19,6 +19,21 @@ class TaskListRepository extends ServiceEntityRepository
         parent::__construct($registry, TaskList::class);
     }
 
+    public function findOneByIdJoinedToOwner($taskListId)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT t, o
+            FROM App\Entity\TaskList t
+            INNER JOIN t.owner_id o
+            WHERE t.id = :id'
+        )->setParameter('id', $taskListId);
+
+        return $query->getOneOrNullResult();
+    }
+
+    
     // /**
     //  * @return TaskList[] Returns an array of TaskList objects
     //  */

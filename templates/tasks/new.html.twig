@@ -1,0 +1,18 @@
+{% extends 'main/index.html.twig' %}
+
+{% block title %}Nieuwe lijst aanmaken {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Nieuwe To-Do-List</h1>
+
+    {{ form_start(taskList) }}
+        {{ form_row(taskList.name) }}
+        {{ form_row(taskList.description) }}
+        {{ form_row(taskList.owner) }}
+        {{ form_row(taskList.tasks) }}
+        {{ form_row(taskList.isPublished) }}
+        {{ form_row(taskList.isComplete, {taskList.isComplete.vars.disabled : 'true'}) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(taskList) }}
+{% endblock %}

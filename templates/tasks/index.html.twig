@@ -1,0 +1,21 @@
+{% extends 'main/index.html.twig' %}
+
+{% block title %}Lijstoverzicht {{ parent() }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Lijstoverzicht voor {{ app.user.email}}</h1>
+            <p class="lead"> Van uitstel komt afstel</p>
+        </div>
+    </div>
+</div>
+
+{% if app.user.taskLists is empty %}
+<div class="row">
+    <h2 class="text-center"> Wat een leegte </h2>
+    <a href="{{ path('new_list') }}"> Nieuwe lijst aanmaken! </a>
+</div>
+{% endif %}
+{% endblock %}

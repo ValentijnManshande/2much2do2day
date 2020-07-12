@@ -16,4 +16,12 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
+
+    /**
+    * @Route("/my-list", name="my_list")
+    */
+    public function myList()
+    {
+        // TO DO   
+    }
 }
