@@ -3,43 +3,45 @@
 {% block title %}Log in! {{ parent() }}{% endblock %}
 
 {% block body %}
-<div class="col-4 col-offset-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Login via site</h3>
-        </div>
-        <form method="post">
+<div class="row justify-content-center">
+    <div class="col-4">
+        <div class="panel panel-default">
             {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
-            <div class="form-group">
-                <label for="inputEmail">Email</label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" required>
-            </div>
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" name="_remember_me">
-                <label class="form-check-label"> Onthoud mij </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-lg btn-primary" type="submit">
-                        Inloggen
-                    </button>
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Inloggen</h3>
+           </div>
+            <form method="post" action="{{ path('app_login') }} ">
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
                 </div>
-                <div class="col">
-                    <a href={{path('register')}}> 
-                        Registreer een account
-                    </a>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
                 </div>
-            </div>
-            <input type="hidden" name="_csrf_token"
-                value="{{ csrf_token('authenticate') }}"
-            >
-        </form>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" name="_remember_me">
+                    <label class="form-check-label"> Onthoud mij </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-lg btn-primary" type="submit">
+                            Inloggen
+                        </button>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-lg btn-secondary" href={{path('register')}}> 
+                            Registreer een account
+                        </a>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -6,18 +6,19 @@ use App\Repository\TaskListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Partials\CompletedTrait as Completed;
-use App\Partials\DateTimeTrait as DateTimes;
-use App\Partials\PublishedTrait as Published;
+use App\Entity\Partials\CompletedTrait;
+use App\Entity\Partials\DateTimeTrait;
+use App\Entity\Partials\PublishedTrait;
 
 /**
  * @ORM\Entity(repositoryClass=TaskListRepository::class)
  */
 class TaskList
 {
-    use Completed;
-    use DateTimes;
-    use Published;
+    use CompletedTrait;
+    use DateTimeTrait;
+    use PublishedTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,19 +37,21 @@ class TaskList
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="taskLists")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="taskLists")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="taskList", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="taskList", orphanRemoval=true)
      */
     private $tasks;
 
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->isPublished = false;
+        $this->isComplete = false;
     }
 
     public function getId(): ?int

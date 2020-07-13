@@ -4,14 +4,14 @@ namespace App\Entity;
 
 use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Partials\CompletedTrait as Completed;
+use App\Entity\Partials\CompletedTrait;
 
 /**
  * @ORM\Entity(repositoryClass=TaskRepository::class)
  */
 class Task
 {
-    use Completed;
+    use CompletedTrait;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,8 +20,8 @@ class Task
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=TaskList::class, inversedBy="tasks")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="TaskList", inversedBy="tasks")
+     * @ORM\JoinColumn(name="task_list_id", referencedColumnName="id")
      */
     private $taskList;
 

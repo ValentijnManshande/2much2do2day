@@ -1,5 +1,5 @@
 <?php
-namespace App\Partials;
+namespace App\Entity\Partials;
 
 trait DateTimeTrait
 {

@@ -1,32 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Welkom! {{ parent() }} {% endblock %}
+{% block title %} Welkom! {{ parent() }} {% endblock title %}
 
 {% block body %}
+
 {% block navigation %}
     {{ include('partials/navigation.html.twig') }}
-{% endblock %}
-<div class="container-fluid">
-    <div class="row flex-xl-nowrap">
+{% endblock navigation %}
 
+<div class="row justify-content-center">
+    <div class="col-10">
     {% block content %}
         <div class="jumbotron jumbotron-fluid">
-            <h1 class="text-center"> Welkom bij 2Much2Do2Day </h1>
+            <h1 class="text-center display-4"> Welkom bij 2Much2Do2Day </h1>
             <div class="container">
-                <h1 class="display-4">Geen pen? Geen papier? Geen probleem.</h1>
-                <p class="lead"> Een digitale oplossing voor analoge verantwoordelijkheden </p>
+                <h1 class="text-center display-5">Geen pen? Geen papier? Geen probleem.</h1>
+                <p class="lead text-center"> Een digitale oplossing voor analoge verantwoordelijkheden </p>
                 <hr class="my-4">
                 <p> 
                     Ook zo'n moeite met het bijhouden van al je taken? Laat ons de last verlichten.
                     Houd vanaf nu al je taken eenvoudig bij met ons platform.
                 </p>
-                <a class="btn btn-primary btn-lg" href="{{ path('my_list') }}" role="button">Begin direct!</a>
-                <a class="btn btn-secondary btn-lg" href="{{ path('overview') }}" role="button">Bekijk lijsten </a>
+                <div class="d-flex flex-row justify-content-around">
+                    <a class="btn btn-primary btn-lg" href="{{ path('my_list') }}">Begin direct!</a>
+                    <a class="btn btn-secondary btn-lg" href="{{ path('list_overview') }}">Bekijk lijsten </a>
+                </div>
             </div>
         </div>
     {% endblock content %}
-
     </div>
 </div>
-
 {% endblock body %}

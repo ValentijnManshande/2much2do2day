@@ -1,18 +1,38 @@
 {% extends 'main/index.html.twig' %}
 
-{% block title %}Nieuwe lijst aanmaken {{ parent() }}{% endblock %}
+{% block title %}Nieuwe lijst aanmaken {% endblock title %}
 
 {% block content %}
+<div class="jumbotron jumbotron-fluid">
     <h1 class="text-center">Nieuwe To-Do-List</h1>
+    <div class="container-fluid">
+        {{ form_start(taskList) }}
+        <div class="col-12">
+            {{ form_row(taskList.name) }}
+            {{ form_row(taskList.description) }}
+            <div class= "form-group">
+                <h2 class="text-center"> Taken </h2>
+                <ul class="tasks" data-prototype="{{ form_widget(taskList.tasks.vars.prototype)|e('html_attr') }}">
+                {% for tasks in taskList.tasks %}
+                    {{ form_widget(taskList.tasks.vars.prototype.name)|e }}
+                    {{ form_widget(taskList.tasks.vars.prototype.isComplete)|e }}
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="d-flex flex-row justify-content-around">
+                {{ form_row(taskList.isPublished) }}
+                {{ form_row(taskList.isComplete) }} 
+            </div>
+            <div class="d-flex flex-row justify-content-center">
+                <button type="submit" class="btn btn-secondary btn-large">Nieuwe lijst aanmaken.</button>
+            </div>
+            {{ form_end(taskList) }}
+        </div>
+    </div>
+</div>
+{% endblock content %}
 
-    {{ form_start(taskList) }}
-        {{ form_row(taskList.name) }}
-        {{ form_row(taskList.description) }}
-        {{ form_row(taskList.owner) }}
-        {{ form_row(taskList.tasks) }}
-        {{ form_row(taskList.isPublished) }}
-        {{ form_row(taskList.isComplete, {taskList.isComplete.vars.disabled : 'true'}) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(taskList) }}
+{% block javascripts %}
+{{ parent() }}
+<script src={{ asset('scripts/addTasks.js') }}></script>
 {% endblock %}

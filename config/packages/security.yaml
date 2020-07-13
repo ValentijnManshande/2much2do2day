@@ -23,10 +23,12 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
-                target: login
+                target: app_login
             form_login:
-                login_path: login
-                check_path: login
+                login_path: app_login
+                check_path: app_login
+                csrf_token_generator: security.csrf.token_manager
+                
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800

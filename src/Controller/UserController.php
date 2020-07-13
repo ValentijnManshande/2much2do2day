@@ -8,20 +8,29 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("/users", name="user_overview")
      */
     public function index()
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        if(!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        };
+
+        return $this->render('user/index.html.twig');
     }
 
     /**
-    * @Route("/my-list", name="my_list")
+    * @Route("/my-profile", name="my_profile")
     */
-    public function myList()
+    public function show()
     {
-        // TO DO   
+        if(!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        };
+
+        return $this->render('user/profile.html.twig');
     }
+
+
+    // TO DO: set up user profile related views and actions.
 }

@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+use App\Form\TaskListType;
+use App\Entity\TaskList;
 
 class TasksController extends AbstractController
 {
@@ -12,17 +16,26 @@ class TasksController extends AbstractController
      */
     public function index()
     {
-        return $this->render('tasks/index.html.twig', [
-            'controller_name' => 'TasksController',
-        ]);
+        return $this->render('tasks/index.html.twig');
     }
 
     /**
-    * @Route("/my-list/new", name="new_list")
+    * @Route("/my-list/new", name="new_list", methods={"GET", "POST"})
     */
-    public function new()
+    public function new(Request $request, Security $security)
     {
+        $taskList = new TaskList();
+        $user = $this->getUser();
+        $form = $this->createForm(TaskListType::class, $taskList);
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // TO DO
+        }
+        return $this->render('tasks/new.html.twig', [
+            'taskList' => $form->createView(),
+        ]);
     }
 
     public function edit()
@@ -35,9 +48,6 @@ class TasksController extends AbstractController
 
     }
 
-    /**
-    * @Route("/my-list/{id}", name="my_list")
-    */
     public function show($id)
     {
         

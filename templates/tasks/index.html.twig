@@ -3,19 +3,19 @@
 {% block title %}Lijstoverzicht {{ parent() }}{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Lijstoverzicht voor {{ app.user.email}}</h1>
-            <p class="lead"> Van uitstel komt afstel</p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="text-center display-4">Lijstoverzicht voor {{ app.user.email}}</h1>
+        <p class="text-center lead"> Van uitstel komt afstel</p>
+        {% if app.user.taskLists is empty %}
+        <hr class="my-4">
+        
+        <h2 class="text-center"> Wat een leegte </h2>
+        <div class="d-flex flex-row justify-content-around">
+            <a class="btn btn-primary btn-lg" href="{{ path('new_list') }}"> Nieuwe lijst aanmaken! </a>
         </div>
+        {% endif %}
     </div>
 </div>
 
-{% if app.user.taskLists is empty %}
-<div class="row">
-    <h2 class="text-center"> Wat een leegte </h2>
-    <a href="{{ path('new_list') }}"> Nieuwe lijst aanmaken! </a>
-</div>
-{% endif %}
 {% endblock %}

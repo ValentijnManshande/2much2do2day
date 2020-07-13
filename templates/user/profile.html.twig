@@ -1,10 +1,10 @@
 {% extends 'main/index.html.twig' %}
 
-{% block title %}Gebruikersoverzicht{% endblock title %}
+{% block title %}Eigen profiel {% endblock title %}
 
 {% block content %}
 <div class="jumbotron jumbotron-fluid">
-    <h1 class="text-center display-4"> Geregistreerde gebruikers </h1>
+    <h1 class="text-center display-4"> Profiel voor: {{ app.user.email}} </h1>
     <div class="container">
         <h1 class="text-center display-5">Work In Progress</h1>
         <p class="lead text-center">Dit deel van de website is nog niet af. </p>
