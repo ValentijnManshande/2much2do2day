@@ -39,7 +39,7 @@ class TaskList
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="taskLists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $owner;
+    private $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Task::class, mappedBy="taskList", orphanRemoval=true)
@@ -80,14 +80,14 @@ class TaskList
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getUser(): ?User
     {
-        return $this->owner;
+        return $this->user;
     }
 
-    public function setOwner(?User $owner): self
+    public function setUser(?User $user): self
     {
-        $this->owner = $owner;
+        $this->owner = $user;
 
         return $this;
     }

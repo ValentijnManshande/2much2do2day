@@ -42,7 +42,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=TaskList::class, mappedBy="owner", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=TaskList::class, mappedBy="user", orphanRemoval=true)
      */
     private $taskLists;
 
