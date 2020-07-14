@@ -11,6 +11,12 @@ use App\Entity\TaskList;
 
 class TasksController extends AbstractController
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
     /**
      * @Route("/my-list", name="my_list")
      */
@@ -25,14 +31,38 @@ class TasksController extends AbstractController
     public function new(Request $request, Security $security)
     {
         $taskList = new TaskList();
-        $user = $this->getUser();
+        $user = $this->security->getUser();
         $form = $this->createForm(TaskListType::class, $taskList);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // TO DO
+            
+            $name = $form->get('name')->getData();
+            $description = $form->get('description')->getData();
+            $tasks = $form->get('tasks')->getData();
+            $published = $form->get('isPublished')->getData();
+            $complete = false;
+            
+            $taskList->setName($name);
+            $taskList->setDescription($description);
+
+            // tasks should be set via add/remove methods and get persisted via Doctrine magic,
+            // hence their absence here.
+
+            $taskList->setUser($user->getId());
+            $taskList->setIsPublished($published);
+            $taskList->setIsComplete($complete);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($taskList);
+            $entityManager->flush();
+
+            return $this->render('tasks/index.html.twig', [
+                'succes' => true,
+            ]);
         }
+        
         return $this->render('tasks/new.html.twig', [
             'taskList' => $form->createView(),
         ]);
@@ -40,12 +70,12 @@ class TasksController extends AbstractController
 
     public function edit()
     {
-
+            // TO DO
     }
 
     public function remove()
     {
-
+            // TO DO
     }
 
     public function show($id)
